@@ -1,0 +1,14 @@
+browser=chrome
+tutorialNinjaApplication= http://tutorialsninja.com/demo
+firstName = Raju
+lastName = Tale
+emailID = rajesh14@yop.com
+newEmailID = RajuTale216@yopmail.com
+contactNo = 7218688193
+password = Ramesh@605
+
+//Login functionality
+loginCredential_email = pavanhiware11@gmail.com
+loginCredential_password = Hiware1234
+loginInvalid_password = 1234
+changePassword_newPassword = Hiware1234
