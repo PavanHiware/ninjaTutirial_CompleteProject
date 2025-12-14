@@ -1,0 +1,16 @@
+
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
+<suite name="AutomationSuite" verbose="1" parallel="false">
+
+
+	<test name="TutorialNinjaTests">
+		<groups>
+			<run>
+				<include name="logout"></include>
+			</run>
+		</groups>
+		<classes>
+			<class name="testCases.testCases" />
+		</classes>
+	</test>
+</suite>
