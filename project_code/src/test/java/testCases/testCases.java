@@ -1,13 +1,16 @@
 package testCases;
 
 import java.io.IOException;
+import java.sql.SQLException;
 
 import org.testng.Assert;
 import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
 
 import utilities.commonUtils;
+import utilities.customerDetails;
 import utilities.proportiesFileLoader;
+import utilities.sql_dataBase_dataLoader;
 
 @Listeners(extentReportManager.class)
 public class testCases extends baseClass {
@@ -32,7 +35,7 @@ public class testCases extends baseClass {
 	}
 
 	@Test(groups = {"register"})
-	public void testCase04() throws IOException {
+	public void testCase04() throws IOException, SQLException {
 
 		pageObjectManager.getHomepage().clickMyAccount();
 		pageObjectManager.getHomepage().clickRegisterAccount();
@@ -50,6 +53,13 @@ public class testCases extends baseClass {
 				"Telephone must be between 3 and 32 characters!");
 		Assert.assertEquals(pageObjectManager.getRegistrationPage().errorMessage_password(),
 				"Password must be between 4 and 20 characters!");
+		
+//		sqldata.fetchData(requiredPara.getProporty("validCredential_query"));
+//		customerDetails customer = new customerDetails();
+		customerDetails customer =
+		        sqldata.fetchData(requiredPara.getProporty("validCredential_query"));
+		System.out.println("POJO class outpu firstName: "+customer.getFirstName());
+		System.out.println("POJO class output mobile No: "+customer.getContactNo());
 	}
 
 	@Test(groups = {"register"})

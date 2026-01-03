@@ -2,6 +2,8 @@ package testCases;
 
 import java.io.File;
 import java.io.IOException;
+import java.sql.Connection;
+import java.sql.DriverManager;
 import java.time.Duration;
 import java.util.Date;
 
@@ -16,13 +18,14 @@ import com.google.common.io.Files;
 
 import pageObjects.pageObjectManager;
 import utilities.proportiesFileLoader;
+import utilities.sql_dataBase_dataLoader;
 
 public class baseClass {
 	public static WebDriver driver;
 	public pageObjectManager pageObjectManager;
 	browserInitilization browserInit = new browserInitilization();
 	proportiesFileLoader requiredPara = new proportiesFileLoader();
-
+	sql_dataBase_dataLoader sqldata = new sql_dataBase_dataLoader();
 	@BeforeSuite
 	public void invokeBrowser() throws IOException {
 		driver = browserInit.browseInitiation();
@@ -61,9 +64,13 @@ public class baseClass {
 		Date currentDate = new Date();
 		String ssName = currentDate.toString().replace(" ", "_").replace(":", "_");
 		File ssFile = ((TakesScreenshot) driver).getScreenshotAs(OutputType.FILE);
-		String destiFile_ss = "C:\\Users\\2110883\\project\\ninjaTutorialsWebsite\\screenshots\\" + ssName + ".png";
+		String destiFile_ss = "C:\\Users\\asus\\git\\ninjaTutirial_CompleteProject\\project_code\\screenshots" + ssName + ".png";
 		Files.copy(ssFile, new File(destiFile_ss));
 		return destiFile_ss;
 	}
 
+		
+	
 }
+
+
