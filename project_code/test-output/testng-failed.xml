@@ -6,12 +6,9 @@
       <class name="testCases.testCases">
         <methods>
           <include name="resetToHomePage"/>
-          <include name="logout_testCase02"/>
-          <include name="testCase05"/>
-          <include name="login_testCase10"/>
+          <include name="testCase04"/>
           <include name="invokeBrowser"/>
           <include name="closeBroser"/>
-          <include name="testCase06"/>
         </methods>
       </class> <!-- testCases.testCases -->
     </classes>
