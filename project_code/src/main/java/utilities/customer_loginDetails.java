@@ -1,6 +1,6 @@
 package utilities;
 
-public class customerDetails {
+public class customer_loginDetails {
 	  private String firstName;
 	    private String lastName;
 	    private String emailID;

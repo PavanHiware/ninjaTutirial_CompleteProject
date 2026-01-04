@@ -8,24 +8,26 @@ import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
 
 import utilities.commonUtils;
-import utilities.customerDetails;
+import utilities.customer_loginDetails;
+import utilities.customer_registrationDetails;
 import utilities.proportiesFileLoader;
-import utilities.sql_dataBase_dataLoader;
 
 @Listeners(extentReportManager.class)
 public class testCases extends baseClass {
 	proportiesFileLoader requiredPara = new proportiesFileLoader();
 
 	@Test(groups = {"register"})
-	public void testCase01() throws IOException {
+	public void testCase01() throws IOException, SQLException {
+		customer_registrationDetails  customer =
+		        sqldata.fetchRegistrationData(requiredPara.getProporty("registration_customer_query"));
 
 		pageObjectManager.getHomepage().clickMyAccount();
 		pageObjectManager.getHomepage().clickRegisterAccount();
-		pageObjectManager.getRegistrationPage().enterFirstName("firstName");
-		pageObjectManager.getRegistrationPage().enterLastName("lastName");
-		pageObjectManager.getRegistrationPage().enterEmail("emailID");
-		pageObjectManager.getRegistrationPage().enterPhoneNumber("contactNo");
-		pageObjectManager.getRegistrationPage().enterPasswordAndVerify("password");
+		pageObjectManager.getRegistrationPage().enterFirstName(customer.getFirstName());
+		pageObjectManager.getRegistrationPage().enterLastName(customer.getLastName());
+		pageObjectManager.getRegistrationPage().enterEmail(customer.getEmailID());
+		pageObjectManager.getRegistrationPage().enterPhoneNumber(customer.getContactNo());
+		pageObjectManager.getRegistrationPage().enterPasswordAndVerify(customer.getPassword());
 		pageObjectManager.getRegistrationPage().checkPrivacyPolicy();
 		pageObjectManager.getRegistrationPage().clickContinueAndVerify();
 		pageObjectManager.getRegistrationPage().confirmAndContinue();
@@ -54,12 +56,6 @@ public class testCases extends baseClass {
 		Assert.assertEquals(pageObjectManager.getRegistrationPage().errorMessage_password(),
 				"Password must be between 4 and 20 characters!");
 		
-//		sqldata.fetchData(requiredPara.getProporty("validCredential_query"));
-//		customerDetails customer = new customerDetails();
-		customerDetails customer =
-		        sqldata.fetchData(requiredPara.getProporty("validCredential_query"));
-		System.out.println("POJO class outpu firstName: "+customer.getFirstName());
-		System.out.println("POJO class output mobile No: "+customer.getContactNo());
 	}
 
 	@Test(groups = {"register"})
@@ -110,23 +106,31 @@ public class testCases extends baseClass {
 	}
 
 	@Test(groups = { "login" })
-	public void login_testCase01() throws IOException {
+	public void login_testCase01() throws IOException, SQLException {
+		customer_loginDetails customer =
+		        sqldata.fetchData(requiredPara.getProporty("validCredential_query"));
+		System.out.println("POJO class outpu emailID: "+customer.getEmailID());
+		System.out.println("POJO class output password: "+customer.getPassword());
 		openApplication("tutorialNinjaApplication");
 		pageObjectManager.getHomepage().clickMyAccount();
 		pageObjectManager.getHomepage().clickLogin();
-		pageObjectManager.getLoginPage().enterEmailLogin("valid credential");
-		pageObjectManager.getLoginPage().enterPasswordLogin("valid credential");
+		pageObjectManager.getLoginPage().enterEmailLogin(customer.getEmailID());
+		pageObjectManager.getLoginPage().enterPasswordLogin(customer.getPassword());
 		pageObjectManager.getLoginPage().clickLoginButton();
 		Assert.assertEquals(pageObjectManager.getCustomerAccountPage().validateAccountPage(), true);
 	}
 
 	@Test(groups = { "login" })
-	public void login_testCase02() throws IOException {
+	public void login_testCase02() throws IOException, SQLException {
+		customer_loginDetails customer =
+		        sqldata.fetchData(requiredPara.getProporty("invalidCredential_query"));
+		System.out.println(customer.getEmailID());
+		System.out.println(customer.getPassword());
 		openApplication("tutorialNinjaApplication");
 		pageObjectManager.getHomepage().clickMyAccount();
 		pageObjectManager.getHomepage().clickLogin();
-		pageObjectManager.getLoginPage().enterEmailLogin("valid credential");
-		pageObjectManager.getLoginPage().enterPasswordLogin("invalid credential");
+		pageObjectManager.getLoginPage().enterEmailLogin(customer.getEmailID());
+		pageObjectManager.getLoginPage().enterPasswordLogin(customer.getPassword());
 		pageObjectManager.getLoginPage().clickLoginButton();
 		Assert.assertEquals(pageObjectManager.getLoginPage().alertMessage_noMatchFound(),
 				"Warning: No match for E-Mail Address and/or Password.");

@@ -44,36 +44,36 @@ public class store_registerationPage {
 	By coloumLink_dropMenu = By.xpath("//*[@id=\"column-right\"]/div/a");
 	
 	public String enterFirstName(String firstName) throws IOException {
-		String name = requiredPara.getProporty(firstName);
-		driver.findElement(input_firstName).sendKeys(name);
-		System.out.println(name);
-		return name;
+//		String name = requiredPara.getProporty(firstName);
+		driver.findElement(input_firstName).sendKeys(firstName);
+//		System.out.println(name);
+		return firstName;
 	}
 
 	public String enterLastName(String lastName) throws IOException {
-		String surname = requiredPara.getProporty(lastName);
-		driver.findElement(input_lastName).sendKeys(surname);
-		System.out.println(surname);
-		return surname;
+//		String surname = requiredPara.getProporty(lastName);
+		driver.findElement(input_lastName).sendKeys(lastName);
+//		System.out.println(surname);
+		return lastName;
 	}
 
 	public String enterEmail(String emailID) throws IOException {
-		String email = requiredPara.getProporty(emailID);
-		driver.findElement(input_email).sendKeys(email);
-		System.out.println(email);
-		return email;
+//		String email = requiredPara.getProporty(emailID);
+		driver.findElement(input_email).sendKeys(emailID);
+//		System.out.println(email);
+		return emailID;
 	}
 
 	public void enterPhoneNumber(String contactNo) throws IOException {
-		String phoneNum = requiredPara.getProporty(contactNo);
-		driver.findElement(input_phoneNumber).sendKeys(phoneNum);
+//		String phoneNum = requiredPara.getProporty(contactNo);
+		driver.findElement(input_phoneNumber).sendKeys(contactNo);
 
 	}
 
 	public void enterPasswordAndVerify(String password) throws IOException {
-		String pass = requiredPara.getProporty(password);
-		driver.findElement(input_password).sendKeys(pass);
-		driver.findElement(input_confiPassword).sendKeys(pass);
+//		String pass = requiredPara.getProporty(password);
+		driver.findElement(input_password).sendKeys(password);
+		driver.findElement(input_confiPassword).sendKeys(password);
 
 	}
 

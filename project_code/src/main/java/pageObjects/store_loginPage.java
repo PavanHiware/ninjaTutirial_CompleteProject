@@ -32,34 +32,36 @@ public class store_loginPage {
 
 	}
 
-	public void enterEmailLogin(String creds) throws IOException {
-		if (creds.equalsIgnoreCase("valid credential")) {
-			String email = requiredPara.getProporty("loginCredential_email");
-			driver.findElement(inputBox_email).sendKeys(email);
-		} else if (creds.equalsIgnoreCase("invalid credential")) {
-			String email = requiredPara.getProporty("loginInvalid_email");
-			driver.findElement(inputBox_email).sendKeys(email);
-		} else if (creds.equalsIgnoreCase(" ")) {
-			driver.findElement(inputBox_email).sendKeys(" ");
-		}
+	public void enterEmailLogin(String email) throws IOException {
+//		if (creds.equalsIgnoreCase("valid credential")) {
+//			String email = requiredPara.getProporty("loginCredential_email");
+//			driver.findElement(inputBox_email).sendKeys(email);
+//		} else if (creds.equalsIgnoreCase("invalid credential")) {
+//			String email = requiredPara.getProporty("loginInvalid_email");
+//			driver.findElement(inputBox_email).sendKeys(email);
+//		} else if (creds.equalsIgnoreCase(" ")) {
+//			driver.findElement(inputBox_email).sendKeys(" ");
+//		}
+		driver.findElement(inputBox_email).sendKeys(email);
 	}
 
-	public void enterPasswordLogin(String creds) throws IOException {
-		if (creds.equalsIgnoreCase("valid credential")) {
-
-			String password = requiredPara.getProporty("loginCredential_password");
-			driver.findElement(inputBox_password).sendKeys(password);
-		} else if (creds.equalsIgnoreCase("invalid credential")) {
-			String password = requiredPara.getProporty("loginInvalid_password");
-			driver.findElement(inputBox_password).sendKeys(password);
-
-		} else if (creds.equalsIgnoreCase(" ")) {
-			driver.findElement(inputBox_password).sendKeys("");
-
-		}else if (creds.equalsIgnoreCase("password change")) {
-			String password = requiredPara.getProporty("changePassword_newPassword");
-			driver.findElement(inputBox_password).sendKeys(password);
-		}
+	public void enterPasswordLogin(String password) throws IOException {
+//		if (creds.equalsIgnoreCase("valid credential")) {
+//
+//			String password = requiredPara.getProporty("loginCredential_password");
+//			driver.findElement(inputBox_password).sendKeys(password);
+//		} else if (creds.equalsIgnoreCase("invalid credential")) {
+//			String password = requiredPara.getProporty("loginInvalid_password");
+//			driver.findElement(inputBox_password).sendKeys(password);
+//
+//		} else if (creds.equalsIgnoreCase(" ")) {
+//			driver.findElement(inputBox_password).sendKeys("");
+//
+//		}else if (creds.equalsIgnoreCase("password change")) {
+//			String password = requiredPara.getProporty("changePassword_newPassword");
+//			driver.findElement(inputBox_password).sendKeys(password);
+//		}
+		driver.findElement(inputBox_password).sendKeys(password);
 	}
 	public void clickOnForgotPassword() {
 		driver.findElement(link_forgotPassword).click();

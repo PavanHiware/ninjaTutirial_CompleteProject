@@ -17,6 +17,7 @@ import org.testng.annotations.BeforeSuite;
 import com.google.common.io.Files;
 
 import pageObjects.pageObjectManager;
+import utilities.customer_loginDetails;
 import utilities.proportiesFileLoader;
 import utilities.sql_dataBase_dataLoader;
 
@@ -26,6 +27,7 @@ public class baseClass {
 	browserInitilization browserInit = new browserInitilization();
 	proportiesFileLoader requiredPara = new proportiesFileLoader();
 	sql_dataBase_dataLoader sqldata = new sql_dataBase_dataLoader();
+	
 	@BeforeSuite
 	public void invokeBrowser() throws IOException {
 		driver = browserInit.browseInitiation();
