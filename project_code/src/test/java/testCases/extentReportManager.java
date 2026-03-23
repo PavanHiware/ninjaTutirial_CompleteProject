@@ -70,8 +70,8 @@ public class extentReportManager extends baseClass implements ITestListener {
 
 		String ssPath = null;
 		try {
-			System.out.println("Value of driver in listener: " + getDriver());
-			if (getDriver() != null && ((RemoteWebDriver) getDriver()).getSessionId() != null) {
+			System.out.println("Value of driver in listener: " + baseClass.driver);
+			if (baseClass.driver != null ) {
 
 				ssPath = captureScreenshot();
 			} else {

@@ -66,7 +66,7 @@ public class baseClass {
 		Date currentDate = new Date();
 		String ssName = currentDate.toString().replace(" ", "_").replace(":", "_");
 		File ssFile = ((TakesScreenshot) driver).getScreenshotAs(OutputType.FILE);
-		String destiFile_ss = "C:\\Users\\asus\\git\\ninjaTutirial_CompleteProject\\project_code\\screenshots" + ssName + ".png";
+		String destiFile_ss = "C:\\Users\\asus\\git\\ninjaTutirial_CompleteProject\\project_code\\screenshots\\" + ssName + ".png";
 		Files.copy(ssFile, new File(destiFile_ss));
 		return destiFile_ss;
 	}
