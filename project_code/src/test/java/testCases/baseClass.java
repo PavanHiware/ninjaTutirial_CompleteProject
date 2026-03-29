@@ -65,8 +65,14 @@ public class baseClass {
 
 		Date currentDate = new Date();
 		String ssName = currentDate.toString().replace(" ", "_").replace(":", "_");
+		
+		//project root directory
+		String projectPath = System.getProperty("user.dir");
+		//Screenshot folder directory
+		String screenshotPath = projectPath + File.separator +"screenshots";
+		
 		File ssFile = ((TakesScreenshot) driver).getScreenshotAs(OutputType.FILE);
-		String destiFile_ss = "C:\\Users\\asus\\git\\ninjaTutirial_CompleteProject\\project_code\\screenshots\\" + ssName + ".png";
+		String destiFile_ss = screenshotPath + File.separator + ssName + ".png";
 		Files.copy(ssFile, new File(destiFile_ss));
 		return destiFile_ss;
 	}
