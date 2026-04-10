@@ -4,7 +4,10 @@ import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
+import java.util.HashMap;
+import java.util.Map;
 
+import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.DataFormatter;
 import org.apache.poi.ss.usermodel.FillPatternType;
 import org.apache.poi.ss.usermodel.IndexedColors;
@@ -102,4 +105,38 @@ public class XLutility {
 		fileoutput.close();
 
 	}
+	public String inputUserData(String UserStatus, String requiredParameter) throws IOException {
+//		String path = ;
+		fileinput = new FileInputStream(path);
+
+		workbook = new XSSFWorkbook(fileinput);
+		sheet = workbook.getSheet("Sheet1");
+		XSSFRow headerRow = sheet.getRow(0);
+		Map<String,Integer> columMap = new HashMap<>();
+		
+		for(Cell cell : headerRow) {
+			columMap.put(cell.getStringCellValue().trim(), cell.getColumnIndex());
+		}
+		
+		int statusCol_index = columMap.get("User Status");
+		int targetCol_index = columMap.get(requiredParameter);
+		
+		 for (int i = 1; i <= sheet.getLastRowNum(); i++) {
+             XSSFRow row = sheet.getRow(i);
+             if (row == null) continue;
+
+             if (row.getCell(statusCol_index)
+                     .getStringCellValue()
+                     .equalsIgnoreCase(UserStatus)) {
+
+                 return row.getCell(targetCol_index).getStringCellValue();
+             }
+         }
+		
+		return"";
+		
+		
+		
+	}
+	
 }

@@ -7,6 +7,7 @@ import org.testng.Assert;
 import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
 
+import utilities.XLutility;
 import utilities.commonUtils;
 import utilities.customer_loginDetails;
 import utilities.customer_registrationDetails;
@@ -15,6 +16,7 @@ import utilities.proportiesFileLoader;
 @Listeners(extentReportManager.class)
 public class testCases extends baseClass {
 	proportiesFileLoader requiredPara = new proportiesFileLoader();
+	
 
 	@Test(groups = {"register"})
 	public void testCase01() throws IOException, SQLException {
@@ -240,5 +242,7 @@ public class testCases extends baseClass {
 		util.navigateTo("back");
 
 	}
+	
+
 
 }

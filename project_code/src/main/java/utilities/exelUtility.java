@@ -2,6 +2,8 @@ package utilities;
 
 import java.io.IOException;
 
+import org.apache.xmlbeans.impl.xb.xsdschema.Public;
+
 public class exelUtility {
 	public String path;
 
@@ -10,7 +12,7 @@ public class exelUtility {
 	}
 
 	public void updateResult(String testCaseStatus, int testRunNum) throws IOException {
-		
+
 		XLutility exelUtility = new XLutility(path);
 		int row = exelUtility.getRowCount("Sheet1");
 		int col = exelUtility.getCellCount("Sheet1", 0);
@@ -18,9 +20,9 @@ public class exelUtility {
 		for (int r = 0; r <= row; r++) {
 			for (int c = 0; c < col; c++) {
 				String exelHeading = exelUtility.getCellData("Sheet1", r, c);
-				
+
 				if (exelHeading.equalsIgnoreCase("Test Result")) {
-					exelUtility.testResult("Sheet1", r  + 1 + testRunNum, c, testCaseStatus);
+					exelUtility.testResult("Sheet1", r + 1 + testRunNum, c, testCaseStatus);
 				}
 //				else if (exelHeading.equalsIgnoreCase("passed")) {
 //					r++;
@@ -28,9 +30,8 @@ public class exelUtility {
 //					
 //				}
 			}
-			
 
-			
 		}
 	}
+
 }
