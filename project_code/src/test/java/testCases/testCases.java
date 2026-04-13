@@ -11,6 +11,7 @@ import utilities.XLutility;
 import utilities.commonUtils;
 import utilities.customer_loginDetails;
 import utilities.customer_registrationDetails;
+import utilities.exelUtility;
 import utilities.proportiesFileLoader;
 
 @Listeners(extentReportManager.class)
@@ -20,16 +21,15 @@ public class testCases extends baseClass {
 
 	@Test(groups = {"register"})
 	public void testCase01() throws IOException, SQLException {
-		customer_registrationDetails  customer =
-		        sqldata.fetchRegistrationData(requiredPara.getProporty("registration_customer_query"));
+		XLutility excelUtility = new XLutility(requiredPara.getProporty("testDataSheet_Path"));
 
 		pageObjectManager.getHomepage().clickMyAccount();
 		pageObjectManager.getHomepage().clickRegisterAccount();
-		pageObjectManager.getRegistrationPage().enterFirstName(customer.getFirstName());
-		pageObjectManager.getRegistrationPage().enterLastName(customer.getLastName());
-		pageObjectManager.getRegistrationPage().enterEmail(customer.getEmailID());
-		pageObjectManager.getRegistrationPage().enterPhoneNumber(customer.getContactNo());
-		pageObjectManager.getRegistrationPage().enterPasswordAndVerify(customer.getPassword());
+		pageObjectManager.getRegistrationPage().enterFirstName(excelUtility.inputUserData("New User", "First Name"));
+		pageObjectManager.getRegistrationPage().enterLastName(excelUtility.inputUserData("New User", "Last Name"));
+		pageObjectManager.getRegistrationPage().enterEmail(excelUtility.inputUserData("New User", "Email ID"));
+		pageObjectManager.getRegistrationPage().enterPhoneNumber(excelUtility.inputUserData("New User", "Contact no"));
+		pageObjectManager.getRegistrationPage().enterPasswordAndVerify(excelUtility.inputUserData("New User", "Password"));
 		pageObjectManager.getRegistrationPage().checkPrivacyPolicy();
 		pageObjectManager.getRegistrationPage().clickContinueAndVerify();
 		pageObjectManager.getRegistrationPage().confirmAndContinue();
@@ -62,14 +62,15 @@ public class testCases extends baseClass {
 
 	@Test(groups = {"register"})
 	public void testCase05() throws IOException {
+		XLutility excelUtility = new XLutility(requiredPara.getProporty("testDataSheet_Path"));
 		
 		pageObjectManager.getHomepage().clickMyAccount();
 		pageObjectManager.getHomepage().clickRegisterAccount();
-		pageObjectManager.getRegistrationPage().enterFirstName("firstName");
-		pageObjectManager.getRegistrationPage().enterLastName("lastName");
-		pageObjectManager.getRegistrationPage().enterEmail("newEmailID");
-		pageObjectManager.getRegistrationPage().enterPhoneNumber("contactNo");
-		pageObjectManager.getRegistrationPage().enterPasswordAndVerify("password");
+		pageObjectManager.getRegistrationPage().enterFirstName(excelUtility.inputUserData("New Userr", "First Name"));
+		pageObjectManager.getRegistrationPage().enterLastName(excelUtility.inputUserData("New Userr", "Last Name"));
+		pageObjectManager.getRegistrationPage().enterEmail(excelUtility.inputUserData("New Userr", "Email ID"));
+		pageObjectManager.getRegistrationPage().enterPhoneNumber(excelUtility.inputUserData("New Userr", "Contact No"));
+		pageObjectManager.getRegistrationPage().enterPasswordAndVerify(excelUtility.inputUserData("New Userr", "Password"));
 		pageObjectManager.getRegistrationPage().clickYesToSubscribe();
 		pageObjectManager.getRegistrationPage().checkPrivacyPolicy();
 		pageObjectManager.getRegistrationPage().clickContinueAndVerify();
@@ -80,13 +81,14 @@ public class testCases extends baseClass {
 
 	@Test(groups = {"register"})
 	public void testCase06() throws IOException {
+		XLutility excelUtility = new XLutility(requiredPara.getProporty("testDataSheet_Path"));
 		pageObjectManager.getHomepage().clickMyAccount();
 		pageObjectManager.getHomepage().clickRegisterAccount();
-		pageObjectManager.getRegistrationPage().enterFirstName("firstName");
-		pageObjectManager.getRegistrationPage().enterLastName("lastName");
-		pageObjectManager.getRegistrationPage().enterEmail("newEmailID");
-		pageObjectManager.getRegistrationPage().enterPhoneNumber("contactNo");
-		pageObjectManager.getRegistrationPage().enterPasswordAndVerify("password");
+		pageObjectManager.getRegistrationPage().enterFirstName(excelUtility.inputUserData("New Userrr", "First Name"));
+		pageObjectManager.getRegistrationPage().enterLastName(excelUtility.inputUserData("New Userrr", "Last Name"));
+		pageObjectManager.getRegistrationPage().enterEmail(excelUtility.inputUserData("New Userrr", "Email"));
+		pageObjectManager.getRegistrationPage().enterPhoneNumber(excelUtility.inputUserData("New Userrr", "Contact No"));
+		pageObjectManager.getRegistrationPage().enterPasswordAndVerify(excelUtility.inputUserData("New Userrr", "Password"));
 		pageObjectManager.getRegistrationPage().clickYesToSubscribe();
 		pageObjectManager.getRegistrationPage().checkPrivacyPolicy();
 		pageObjectManager.getRegistrationPage().clickContinueAndVerify();
@@ -109,30 +111,31 @@ public class testCases extends baseClass {
 
 	@Test(groups = { "login" })
 	public void login_testCase01() throws IOException, SQLException {
-		customer_loginDetails customer =
-		        sqldata.fetchData(requiredPara.getProporty("validCredential_query"));
-		System.out.println("POJO class outpu emailID: "+customer.getEmailID());
-		System.out.println("POJO class output password: "+customer.getPassword());
+//		customer_loginDetails customer =
+//		        sqldata.fetchData(requiredPara.getProporty("validCredential_query"));
+//		System.out.println("POJO class outpu emailID: "+customer.getEmailID());
+//		System.out.println("POJO class output password: "+customer.getPassword());
+		XLutility excelUtility = new XLutility(requiredPara.getProporty("testDataSheet_Path"));
+		
 		openApplication("tutorialNinjaApplication");
 		pageObjectManager.getHomepage().clickMyAccount();
 		pageObjectManager.getHomepage().clickLogin();
-		pageObjectManager.getLoginPage().enterEmailLogin(customer.getEmailID());
-		pageObjectManager.getLoginPage().enterPasswordLogin(customer.getPassword());
+		pageObjectManager.getLoginPage().enterEmailLogin(excelUtility.inputUserData("Valid User", "Email ID"));
+		pageObjectManager.getLoginPage().enterPasswordLogin(excelUtility.inputUserData("Valid User", "Password"));
 		pageObjectManager.getLoginPage().clickLoginButton();
 		Assert.assertEquals(pageObjectManager.getCustomerAccountPage().validateAccountPage(), true);
 	}
 
 	@Test(groups = { "login" })
 	public void login_testCase02() throws IOException, SQLException {
-		customer_loginDetails customer =
-		        sqldata.fetchData(requiredPara.getProporty("invalidCredential_query"));
-		System.out.println(customer.getEmailID());
-		System.out.println(customer.getPassword());
+//		customer_loginDetails customer =
+//		        sqldata.fetchData(requiredPara.getProporty("invalidCredential_query"));
+		XLutility excelUtility = new XLutility(requiredPara.getProporty("testDataSheet_Path"));
 		openApplication("tutorialNinjaApplication");
 		pageObjectManager.getHomepage().clickMyAccount();
 		pageObjectManager.getHomepage().clickLogin();
-		pageObjectManager.getLoginPage().enterEmailLogin(customer.getEmailID());
-		pageObjectManager.getLoginPage().enterPasswordLogin(customer.getPassword());
+		pageObjectManager.getLoginPage().enterEmailLogin( excelUtility.inputUserData("Valid User", "Email ID"));
+		pageObjectManager.getLoginPage().enterPasswordLogin(excelUtility.inputUserData("Valid User", "Password"));
 		pageObjectManager.getLoginPage().clickLoginButton();
 		Assert.assertEquals(pageObjectManager.getLoginPage().alertMessage_noMatchFound(),
 				"Warning: No match for E-Mail Address and/or Password.");
@@ -159,12 +162,12 @@ public class testCases extends baseClass {
 
 	@Test(groups = { "login" })
 	public void login_testCase10() throws IOException {
-		
+		XLutility excelUtility = new XLutility(requiredPara.getProporty("testDataSheet_Path"));
 		
 		 pageObjectManager.getHomepage().clickMyAccount();
 		pageObjectManager.getHomepage().clickLogin();
-		pageObjectManager.getLoginPage().enterEmailLogin("valid credential");
-		pageObjectManager.getLoginPage().enterPasswordLogin("valid credential");
+		pageObjectManager.getLoginPage().enterEmailLogin(excelUtility.inputUserData("Valid User", "Email ID"));
+		pageObjectManager.getLoginPage().enterPasswordLogin(excelUtility.inputUserData("Valid User", "Password"));
 		pageObjectManager.getLoginPage().clickLoginButton();
 		Assert.assertEquals(pageObjectManager.getCustomerAccountPage().validateAccountPage(), true);
 		pageObjectManager.getRegistrationPage().selectLink_from_dropMenu("Logout");
@@ -172,21 +175,22 @@ public class testCases extends baseClass {
 
 	@Test(groups = { "login" })
 	public void login_testCase16() throws IOException {
+		XLutility excelUtility = new XLutility(requiredPara.getProporty("testDataSheet_Path"));
 		pageObjectManager.getHomepage().clickMyAccount();
 		pageObjectManager.getHomepage().clickLogin();
-		pageObjectManager.getLoginPage().enterEmailLogin("valid credential");
-		pageObjectManager.getLoginPage().enterPasswordLogin("valid credential");
+		pageObjectManager.getLoginPage().enterEmailLogin(excelUtility.inputUserData("Valid User", "Email ID"));
+		pageObjectManager.getLoginPage().enterPasswordLogin(excelUtility.inputUserData("Valid User", "Password"));
 		pageObjectManager.getLoginPage().clickLoginButton();
 		Assert.assertEquals(pageObjectManager.getCustomerAccountPage().validateAccountPage(), true);
 		pageObjectManager.getRegistrationPage().selectLink_from_dropMenu("Password");
-		pageObjectManager.getChangePasswordPage().changePassword_enterNewPassword();
-		pageObjectManager.getChangePasswordPage().changePassword_confirmNewPassword();
+		pageObjectManager.getChangePasswordPage().changePassword_enterNewPassword(excelUtility.inputUserData("Valid User", "New Password"));
+		pageObjectManager.getChangePasswordPage().changePassword_confirmNewPassword(excelUtility.inputUserData("Valid User", "New Password"));
 		pageObjectManager.getChangePasswordPage().clickContinue_passwordChange();
 		pageObjectManager.getRegistrationPage().selectLink_from_dropMenu("Logout");
 		pageObjectManager.getHomepage().clickMyAccount();
 		pageObjectManager.getHomepage().clickLogin();
-		pageObjectManager.getLoginPage().enterEmailLogin("valid credential");
-		pageObjectManager.getLoginPage().enterPasswordLogin("password change");
+		pageObjectManager.getLoginPage().enterEmailLogin(excelUtility.inputUserData("Valid User", "Email ID"));
+		pageObjectManager.getLoginPage().enterPasswordLogin(excelUtility.inputUserData("Valid User", "New Password"));
 		pageObjectManager.getLoginPage().clickLoginButton();
 		Assert.assertEquals(pageObjectManager.getCustomerAccountPage().validateAccountPage(), true);
 
@@ -194,10 +198,11 @@ public class testCases extends baseClass {
 
 	@Test(groups = { "logout" })
 	public void logout_testCase01() throws IOException {
+		XLutility excelUtility = new XLutility(requiredPara.getProporty("testDataSheet_Path"));
 		pageObjectManager.getHomepage().clickMyAccount();
 		pageObjectManager.getHomepage().clickLogin();
-		pageObjectManager.getLoginPage().enterEmailLogin("valid credential");
-		pageObjectManager.getLoginPage().enterPasswordLogin("valid credential");
+		pageObjectManager.getLoginPage().enterEmailLogin(excelUtility.inputUserData("Valid User", "Email ID"));
+		pageObjectManager.getLoginPage().enterPasswordLogin(excelUtility.inputUserData("Valid User", "Password"));
 		pageObjectManager.getLoginPage().clickLoginButton();
 		pageObjectManager.getHomepage().clickMyAccount();
 		pageObjectManager.getCustomerAccountPage().clickLogoutButton();
@@ -207,10 +212,11 @@ public class testCases extends baseClass {
 
 	@Test(groups = { "logout" })
 	public void logout_testCase02() throws IOException {
+		XLutility excelUtility = new XLutility(requiredPara.getProporty("testDataSheet_Path"));
 		pageObjectManager.getHomepage().clickMyAccount();
 		pageObjectManager.getHomepage().clickLogin();
-		pageObjectManager.getLoginPage().enterEmailLogin("valid credential");
-		pageObjectManager.getLoginPage().enterPasswordLogin("valid credential");
+		pageObjectManager.getLoginPage().enterEmailLogin(excelUtility.inputUserData("Valid User", "Email ID"));
+		pageObjectManager.getLoginPage().enterPasswordLogin(excelUtility.inputUserData("Valid User", "Password"));
 		pageObjectManager.getLoginPage().clickLoginButton();
 		pageObjectManager.getRegistrationPage().selectLink_from_dropMenu("Logout");
 		pageObjectManager.getLogoutPage().clickContinue();
@@ -219,11 +225,12 @@ public class testCases extends baseClass {
 
 	@Test(groups = { "logout" })
 	public void logout_testCase03() throws IOException {
+		XLutility excelUtility = new XLutility(requiredPara.getProporty("testDataSheet_Path"));
 		
 		pageObjectManager.getHomepage().clickMyAccount();
 		pageObjectManager.getHomepage().clickLogin();
-		pageObjectManager.getLoginPage().enterEmailLogin("valid credential");
-		pageObjectManager.getLoginPage().enterPasswordLogin("valid credential");
+		pageObjectManager.getLoginPage().enterEmailLogin(excelUtility.inputUserData("Valid User", "Email ID"));
+		pageObjectManager.getLoginPage().enterPasswordLogin(excelUtility.inputUserData("Valid User", "Password"));
 		pageObjectManager.getLoginPage().clickLoginButton();
 //		closeBroser();
 		openApplication("tutorialNinjaApplication");
@@ -232,11 +239,12 @@ public class testCases extends baseClass {
 
 	@Test(groups = { "logout" })
 	public void logout_testCase04() throws IOException {
+		XLutility excelUtility = new XLutility(requiredPara.getProporty("testDataSheet_Path"));
 		commonUtils util = new commonUtils(driver);
 		pageObjectManager.getHomepage().clickMyAccount();
 		pageObjectManager.getHomepage().clickLogin();
-		pageObjectManager.getLoginPage().enterEmailLogin("valid credential");
-		pageObjectManager.getLoginPage().enterPasswordLogin("valid credential");
+		pageObjectManager.getLoginPage().enterEmailLogin(excelUtility.inputUserData("Valid User", "Email ID"));
+		pageObjectManager.getLoginPage().enterPasswordLogin(excelUtility.inputUserData("Valid User", "Password"));
 		pageObjectManager.getLoginPage().clickLoginButton();
 		pageObjectManager.getRegistrationPage().selectLink_from_dropMenu("Logout");
 		util.navigateTo("back");

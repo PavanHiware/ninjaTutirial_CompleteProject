@@ -95,7 +95,7 @@ public class XLutility {
 			style.setFillPattern(FillPatternType.SOLID_FOREGROUND);
 
 		}
-		
+
 		cell.setCellValue(result);
 		cell.setCellStyle(style);
 		fileoutput = new FileOutputStream(path);
@@ -105,6 +105,7 @@ public class XLutility {
 		fileoutput.close();
 
 	}
+
 	public String inputUserData(String UserStatus, String requiredParameter) throws IOException {
 //		String path = ;
 		fileinput = new FileInputStream(path);
@@ -112,31 +113,31 @@ public class XLutility {
 		workbook = new XSSFWorkbook(fileinput);
 		sheet = workbook.getSheet("Sheet1");
 		XSSFRow headerRow = sheet.getRow(0);
-		Map<String,Integer> columMap = new HashMap<>();
-		
-		for(Cell cell : headerRow) {
+		Map<String, Integer> columMap = new HashMap<>();
+
+		for (Cell cell : headerRow) {
 			columMap.put(cell.getStringCellValue().trim(), cell.getColumnIndex());
 		}
-		
+
 		int statusCol_index = columMap.get("User Status");
 		int targetCol_index = columMap.get(requiredParameter);
-		
-		 for (int i = 1; i <= sheet.getLastRowNum(); i++) {
-             XSSFRow row = sheet.getRow(i);
-             if (row == null) continue;
 
-             if (row.getCell(statusCol_index)
-                     .getStringCellValue()
-                     .equalsIgnoreCase(UserStatus)) {
+		for (int i = 1; i <= sheet.getLastRowNum(); i++) {
+			XSSFRow row = sheet.getRow(i);
+			if (row == null)
+				continue;
 
-                 return row.getCell(targetCol_index).getStringCellValue();
-             }
-         }
-		
-		return"";
-		
-		
-		
+			if (row.getCell(statusCol_index).getStringCellValue().equalsIgnoreCase(UserStatus)) {
+
+				DataFormatter formatter = new DataFormatter();
+				String requiredData = formatter.formatCellValue(row.getCell(targetCol_index));
+				return requiredData;
+
+			}
+		}
+
+		return "";
+
 	}
-	
+
 }

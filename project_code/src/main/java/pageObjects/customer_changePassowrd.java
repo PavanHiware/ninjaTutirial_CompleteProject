@@ -19,13 +19,13 @@ public class customer_changePassowrd {
 	By input_confirmPassword = By.xpath("//*[@id='input-confirm']");
 	By button_continue = By.xpath("//*[@class='btn btn-primary']");
 
-	public void changePassword_enterNewPassword() throws IOException {
-		String password = requiredPara.getProporty("changePassword_newPassword");
-		driver.findElement(input_password).sendKeys(password);
+	public void changePassword_enterNewPassword(String newPassword) throws IOException {
+//		String password = requiredPara.getProporty("changePassword_newPassword");
+		driver.findElement(input_password).sendKeys(newPassword);
 	}
-	public void changePassword_confirmNewPassword() throws IOException {
-		String password = requiredPara.getProporty("changePassword_newPassword");
-		driver.findElement(input_confirmPassword).sendKeys(password);
+	public void changePassword_confirmNewPassword(String newPassword) throws IOException {
+//		String password = requiredPara.getProporty("changePassword_newPassword");
+		driver.findElement(input_confirmPassword).sendKeys(newPassword);
 	}
 	public void clickContinue_passwordChange() {
 		driver.findElement(button_continue).click();
